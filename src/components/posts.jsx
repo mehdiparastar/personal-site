@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import getPosts from './../services/fakePosts';
 import Like from './like';
+import Pagination from './pagination';
+import { paginate } from '../utils/paginate';
 
 class Posts extends Component {
     state = {
@@ -14,12 +16,26 @@ class Posts extends Component {
         this.setState({ posts: posts })
     }
 
+    handlePageCheange = page => {
+        this.setState({ currentPage: page })
+    }
+
+    getPageData = () => {
+        const { pageSize, currentPage, posts: allPosts } = this.state
+        const posts = paginate(allPosts, currentPage, pageSize)
+        return {
+            totalCount: allPosts.length,
+            data: posts
+        }
+    }
+
     render() {
-        const { posts } = this.state
+        const { pageSize, currentPage } = this.state
+        const { totalCount, data } = this.getPageData()
         return (
             <React.Fragment>
                 {
-                    posts.map(post => (
+                    data.map(post => (
                         <div className='container-fluid' key={post.id}>
                             <div className='card shadow-lg bg-light m-2'>
                                 <article className='p-3'>
@@ -61,6 +77,12 @@ class Posts extends Component {
                         </div>
                     ))
                 }
+                <Pagination
+                    itemCount={totalCount}
+                    pageSize={pageSize}
+                    currentPage={currentPage}
+                    onPageChange={this.handlePageCheange}
+                />
             </React.Fragment>
         );
     }
