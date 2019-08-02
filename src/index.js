@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import 'bootstrap-v4-rtl/dist/css/bootstrap-rtl.css';
 import 'font-awesome/css/font-awesome.css';
 import './css/index.css';
-import './css/navbar.css'; 
+import './css/navbar.css';
+import './css/sidebar.css'; 
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
