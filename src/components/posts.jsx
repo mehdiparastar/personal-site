@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import getPosts from './../services/fakePosts';
+import Like from './like';
 
 class Posts extends Component {
     state = {
@@ -19,7 +20,7 @@ class Posts extends Component {
             <React.Fragment>
                 {
                     posts.map(post => (
-                        <div className='container-fluid'>
+                        <div className='container-fluid' key={post.id}>
                             <div className='card shadow-lg bg-light m-2'>
                                 <article className='p-3'>
                                     <div className='card-header'>
@@ -53,6 +54,7 @@ class Posts extends Component {
                                                 <a href='mehdi'>{post.postTags}</a>
                                             </li>
                                         </ul>
+                                        <Like post={post} />
                                     </div>
                                 </article>
                             </div>
