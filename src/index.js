@@ -1,21 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import 'bootstrap-v4-rtl/dist/css/bootstrap-rtl.css';
 import 'font-awesome/css/font-awesome.css';
 import './css/index.css';
 import './css/navbar.css';
 import './css/sidebar.css';
 import './css/login.css'
+import './css/404.css'
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import Login from './components/login'
+import NotFound from './components/notFound';
+
 
 ReactDOM.render(
     <BrowserRouter>
         <Switch>
             <Route path="/login" component={Login} />
+            <Route path='/not-found' component={NotFound} />
             <Route path='/' component={App} />
+            <Redirect to='/not-found' />
         </Switch>
     </BrowserRouter>,
     document.getElementById('root'));

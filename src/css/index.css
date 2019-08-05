@@ -28,6 +28,8 @@ body {
         'Helvetica Neue', sans-serif !important;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background: url('../images/light-grey-terrazzo.png') repeat center center
+        fixed;
 }
 
 code {
@@ -47,8 +49,8 @@ code {
 
 [role='main'] {
     padding-top: 48px; /* Space for fixed navbar */
-    background: url('../images/light-grey-terrazzo.png') repeat center center
-        fixed;
+    padding-bottom: 50px
+    
 }
 
 .copyright {
