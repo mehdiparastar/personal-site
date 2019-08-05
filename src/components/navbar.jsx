@@ -1,4 +1,5 @@
 import React from 'react';
+import{Link} from 'react-router-dom'
 import SearchBar from './searchBar';
 
 const Navbar = () => {
@@ -10,9 +11,9 @@ const Navbar = () => {
             <SearchBar />
             <ul className='navbar-nav px-3'>
                 <li className='nav-item text-nowrap'>
-                    <a className='nav-link' href='www.google.com'>
-                        خروج
-                    </a>
+                    <Link className='nav-link' to='/login'>
+                        ورود
+                    </Link>
                 </li>
             </ul>
         </nav>
