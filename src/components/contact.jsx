@@ -1,16 +1,23 @@
 import React from 'react';
 
 const Contact = () => {
+    const mapObj = {
+        key: 'service.0cDxa3PkFAoArgYkOEhine8Ve6B6bvQbIuISxxcd',
+        type: 'neshan',
+        zoom: 15,
+        lat: '37.250000',
+        long: '55.167320',
+        width: 500,
+        height: 400,
+        marker: 'blue'
+    }
+
+    const mapUrl = `https://api.neshan.org/v2/static?key=${mapObj.key}&type=${mapObj.type}&zoom=${mapObj.zoom}&center=${mapObj.lat},${mapObj.long}&width=${mapObj.width}&height=${mapObj.height}&marker=${mapObj.marker}`
+
     return (
         <div className="container-fluid">
             <div className="row bg-light border rounded m-2">
-                <div className="col">
-                    <p className="lead m-2">
-                        <span className="fa fa-envelope m-1" />
-                        اطلاعات تماس
-                    </p>
-                </div>
-                <div className="col-6">
+            <div className="col-7 mt-5">
                     <form>
                         <div className="card border-primary rounded m-2">
                             <div className="card-header p-0">
@@ -85,6 +92,26 @@ const Contact = () => {
                         </div>
                     </form>
                 </div>
+                <div className="col">
+                    <p className="lead m-2">
+                        <span className="fa fa-envelope m-1" />
+                        اطلاعات تماس
+                    </p>
+                    <p className='m-2'>
+                        <span className='fa fa-envelope-open' />
+                         آدرس ایمیل:
+                        <span style={{ fontFamily: 'monospace' }} className='m-2 font-weight-bold'>
+                            parastar.mehdi@gmail.com
+                        </span>
+                    </p>
+                    <p className='m-2'>
+                        <span className='fa fa-address-card' />
+                         آدرس:
+                        <span className='m-2'> استان گلستان - گنبد کاووس</span>
+                    </p>
+                    <img className='img-fluid img-thumbnail m-2' src={mapUrl} alt='نقشه مکان' />
+                </div>
+                
             </div>
         </div>
     );
