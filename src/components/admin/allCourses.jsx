@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
-import getPosts from '../../services/fakePosts';
+import getCourses from '../../services/fakeCourses';
 import { paginate } from '../../utils/paginate';
 import Pagination from '../pagination';
 
-class AllPosts extends Component {
+class AllCourses extends Component {
     state = {
-        posts: [],
+        courses: [],
         currentPage: 1,
         pageSize: 5
     }
 
     componentDidMount() {
-        const posts = getPosts()
-        this.setState({ posts })
+        const courses = getCourses()
+        this.setState({ courses: courses })
     }
 
     handlePageChange = page => {
@@ -20,11 +20,11 @@ class AllPosts extends Component {
     }
 
     getPageData = () => {
-        const { pageSize, currentPage, posts: allPosts } = this.state
-        const posts = paginate(allPosts, currentPage, pageSize)
+        const { pageSize, currentPage, courses: allCourses } = this.state
+        const courses = paginate(allCourses, currentPage, pageSize)
         return {
-            totalCount: allPosts.length,
-            data: posts
+            totalCount: allCourses.length,
+            data: courses
         }
     }
 
@@ -38,18 +38,18 @@ class AllPosts extends Component {
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>عنوان پست</th>
-                            <th>تاریخ انتشار</th>
-                            <th>تعداد لایک</th>
+                            <th>عنوان دوره</th>
+                            <th>زمان دوره</th>
+                            <th>قیمت دوره</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map(post => (
-                            <tr key={post.id}>
-                                <th scope='row'>{post.id}</th>
-                                <td>{post.postTitle}</td>
-                                <td>{post.postDate}</td>
-                                <td>{post.like}</td>
+                        {data.map(course => (
+                            <tr key={course.id}>
+                                <th scope='row'>{course.id}</th>
+                                <td>{course.title}</td>
+                                <td>{course.time}</td>
+                                <td>{course.price}</td>
                                 <td>
                                     <button className='btn btn-primary' onClick=''>ویرایش</button>
                                 </td>
@@ -72,4 +72,4 @@ class AllPosts extends Component {
     }
 }
 
-export default AllPosts;
+export default AllCourses;
