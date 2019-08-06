@@ -8,7 +8,7 @@ class CreateCourse extends Component {
         imageUrl: ''
     }
 
-    handleSubmit = e => {
+    handleSubmit = (e) => {
         e.preventDefault()
         console.log(this.state)
     }

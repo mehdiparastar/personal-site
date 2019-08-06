@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import axios from 'axios'
+import { toast } from 'react-toastify';
 import _ from 'lodash'
+
 class CreatePost extends Component {
     state = {
         postTitle: '',
@@ -8,9 +11,19 @@ class CreatePost extends Component {
         postTags: []
     }
 
-    handleSubmit = (e) =>{
+
+    handleSubmit = async e => {
         e.preventDefault()
         console.log(this.state)
+        try {
+            const result = await e.preventDefault()
+            axios.post('http://localhost:3900/api/post', JSON.parse(JSON.stringify(this.state)))
+
+            if (result.status === 200) { toast.success('پست با موفقیت ساخته شد') }
+        }
+        catch (ex) {
+            if (ex.response && ex.response.status === 400) { toast.error('لطفا کلیه موارد را پر کنید') }
+        }
     }
 
     render() {
