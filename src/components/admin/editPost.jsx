@@ -1,22 +1,44 @@
 import React, { Component } from 'react';
-import { createPost } from '../../services/postService'
+import { updatePost } from '../../services/postService'
 import { toast } from 'react-toastify';
 import _ from 'lodash'
 
-class CreatePost extends Component {
+class EditPost extends Component {
     state = {
+        _id: '',
         postTitle: '',
+        postDate: '',
         postImageUrl: '',
         postContent: '',
-        postTags: []
+        postTags: [],
+        postLike: ''
+    }
+
+    componentDidMount() {
+        const { post } = this.props.location
+
+        if (!post) return this.props.history.push('/admin/allposts')
+
+        this.setState({
+            _id: post._id,
+            postTitle: post.postTitle,
+            postDate: post.postDate,
+            postImageUrl: post.postImageUrl,
+            postContent: post.postContent,
+            postTags: post.postTags,
+            postLike: post.postLike
+        })
     }
 
     handleSubmit = async (e) => {
         try {
             e.preventDefault()
 
-            const result = await createPost(JSON.parse(JSON.stringify(this.state)))
-            if (result.status === 200) toast.success('پست با موفقیت ساخته شد')
+            const result = await updatePost(JSON.parse(JSON.stringify(this.state)))
+            if (result.status === 200) {
+                toast.success('پست با موفقیت ویرایش شد')
+                this.props.history.push('/admin/allposts')
+            }
 
         } catch (ex) {
             if (ex.response && ex.response.status === 400)
@@ -84,10 +106,10 @@ class CreatePost extends Component {
                     }
                 />
 
-                <button className="btn btn-success m-5">ساخت پست جدید</button>
+                <button className="btn btn-success m-5"> ویرایش پست </button>
             </form>
         );
     }
 }
 
-export default CreatePost;
+export default EditPost;
