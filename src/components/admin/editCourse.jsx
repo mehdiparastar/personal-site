@@ -1,21 +1,39 @@
 import React, { Component } from 'react';
-import { createCourse } from '../../services/courseService';
+import { updateCourse } from '../../services/courseService'
 import { toast } from 'react-toastify';
 
-class CreateCourse extends Component {
+class EditCourse extends Component {
     state = {
+        _id: '',
         title: '',
+        imageUrl: '',
         time: '',
-        price: '',
-        imageUrl: ''
+        price: ''
+    }
+
+    componentDidMount() {
+        const { course } = this.props.location
+
+        if (!course) return this.props.history.push('/admin/allcourses')
+
+        this.setState({
+            _id: course._id,
+            title: course.title,
+            imageUrl: course.imageUrl,
+            time: course.time,
+            price: course.price
+        })
     }
 
     handleSubmit = async (e) => {
         try {
             e.preventDefault()
 
-            const result = await createCourse(JSON.parse(JSON.stringify(this.state)))
-            if (result.status === 200) toast.success('دوره با موفقیت ساخته شد')
+            const result = await updateCourse(JSON.parse(JSON.stringify(this.state)))
+            if (result.status === 200) {
+                toast.success('دوره با موفقیت ویرایش شد')
+                this.props.history.push('/admin/allcourses')
+            }
 
         } catch (ex) {
             if (ex.response && ex.response.status === 400)
@@ -24,6 +42,7 @@ class CreateCourse extends Component {
     }
 
     render() {
+        console.log('inja')
         return (
             <form
                 onSubmit={this.handleSubmit}
@@ -82,10 +101,10 @@ class CreateCourse extends Component {
                     onChange={e => this.setState({ imageUrl: e.target.value })}
                 />
 
-                <button className="btn btn-success m-5">ساخت دوره جدید</button>
+                <button className="btn btn-success m-5"> ویرایش دوره </button>
             </form>
         );
     }
 }
 
-export default CreateCourse;
+export default EditCourse;

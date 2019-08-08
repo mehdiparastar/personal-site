@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import getCourses from '../../services/fakeCourses';
+import { getCourses, deleteCourse } from '../../services/courseService';
 import { paginate } from '../../utils/paginate';
 import Pagination from '../pagination';
+import { toast } from 'react-toastify';
 
 class AllCourses extends Component {
     state = {
@@ -10,9 +11,36 @@ class AllCourses extends Component {
         pageSize: 5
     }
 
-    componentDidMount() {
-        const courses = getCourses()
+    async componentDidMount() {
+        const { data } = await getCourses()
+        this.setState({ courses: data })
+    }
+
+    handleDelete = async courseId => {
+        const originalCourses = this.state.courses
+
+        const courses = this.state.courses.filter(c => courseId !== c._id)
+
         this.setState({ courses: courses })
+
+        try {
+            const result = await deleteCourse(courseId)
+            if (result && result.status === 200)
+                toast.success('حذف با موفقیت انجام شد')
+        } catch (ex) {
+            console.log(ex)
+            if (ex.response && ex.response.status === 404)
+                toast.error('شما اجازه حذف این دوره را ندارید')
+
+            this.setState({ courses: originalCourses })
+        }
+    }
+
+    handleRedirect = course => {
+        this.props.history.push({
+            pathname: '/admin/editcourse',
+            course
+        })
     }
 
     handlePageChange = page => {
@@ -31,7 +59,7 @@ class AllCourses extends Component {
     render() {
         const { pageSize, currentPage } = this.state
         const { totalCount, data } = this.getPageData()
-
+        let counter = 1
         return (
             <div className='bg-light m-3 p-4 border rounded'>
                 <table className='table'>
@@ -45,16 +73,24 @@ class AllCourses extends Component {
                     </thead>
                     <tbody>
                         {data.map(course => (
-                            <tr key={course.id}>
-                                <th scope='row'>{course.id}</th>
+                            <tr key={course._id}>
+                                <th scope='row'>{counter++}</th>
                                 <td>{course.title}</td>
                                 <td>{course.time}</td>
                                 <td>{course.price}</td>
                                 <td>
-                                    <button className='btn btn-primary' onClick=''>ویرایش</button>
+                                    <button
+                                        className='btn btn-primary'
+                                        onClick={()=>this.handleRedirect(course)}
+                                    >ویرایش
+                                    </button>
                                 </td>
                                 <td>
-                                    <button className='btn btn-danger' onClick=''>حذف</button>
+                                    <button
+                                        className='btn btn-danger'
+                                        onClick={() => this.handleDelete(course._id)}
+                                    >حذف
+                                    </button>
                                 </td>
                             </tr>
                         ))}
