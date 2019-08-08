@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import getPosts from './../services/fakePosts';
+import {getPosts} from './../services/postService';
 import Like from './like';
 import Pagination from './pagination';
 import { paginate } from '../utils/paginate';
@@ -11,9 +11,9 @@ class Posts extends Component {
         pageSize: 5
     }
 
-    componentDidMount() {
-        const posts = getPosts()
-        this.setState({ posts: posts })
+    async componentDidMount() {
+        const {data} = await getPosts()
+        this.setState({ posts: data })
     }
 
     handlePageCheange = page => {
@@ -40,7 +40,7 @@ class Posts extends Component {
             <React.Fragment>
                 {
                     data.map(post => (
-                        <div className='container-fluid' key={post.id}>
+                        <div className='container-fluid' key={post._id}>
                             <div className='card shadow-lg bg-light m-2'>
                                 <article className='p-3'>
                                     <div className='card-header'>
