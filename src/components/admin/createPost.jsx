@@ -11,18 +11,20 @@ class CreatePost extends Component {
         postTags: []
     }
 
-
-    handleSubmit = async e => {
-        e.preventDefault()
-        console.log(this.state)
+    handleSubmit = async (e) => {
+        
         try {
-            const result = await e.preventDefault()
-            axios.post('http://localhost:3900/api/post', JSON.parse(JSON.stringify(this.state)))
+            e.preventDefault()
 
-            if (result.status === 200) { toast.success('پست با موفقیت ساخته شد') }
-        }
-        catch (ex) {
-            if (ex.response && ex.response.status === 400) { toast.error('لطفا کلیه موارد را پر کنید') }
+            const result = await axios.post(
+                "http://localhost:3900/api/post", 
+                JSON.parse(JSON.stringify(this.state))
+            )
+            if (result.status === 200)  toast.success('پست با موفقیت ساخته شد') 
+            
+        }catch (ex) {
+            if (ex.response && ex.response.status === 400)
+                toast.error('لطفا کلیه موارد را پر کنید');        
         }
     }
 
