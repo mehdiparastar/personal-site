@@ -18,3 +18,7 @@ export function updatePost(post){
     delete body._id
     return http.put(`${config.api_post}/${post._id}`,body)
 }
+
+export function getPostsCount(){
+    return http.get(config.api_post + '/count')
+}
