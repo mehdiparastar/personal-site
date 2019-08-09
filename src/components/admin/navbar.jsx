@@ -36,7 +36,7 @@ class Navbar extends Component {
             </p>
             <ul className='navbar-nav px-3'>
                 <li className='nav-item text-nowrap'>
-                    <Link className='nav-link' to='/login'>
+                    <Link className='nav-link' to='/admin/logout'>
                         خروج
                     </Link>
                 </li>

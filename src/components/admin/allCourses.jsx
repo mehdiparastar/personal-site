@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { getCourses, deleteCourse } from '../../services/courseService';
 import { paginate } from '../../utils/paginate';
-import Pagination from '../pagination';
+import Pagination from '../common/pagination';
 import { toast } from 'react-toastify';
 
 class AllCourses extends Component {

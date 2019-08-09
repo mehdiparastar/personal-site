@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { incPostLike } from '../services/postService';
+import { incPostLike } from '../../services/postService';
 
 class Like extends Component {
     state = {

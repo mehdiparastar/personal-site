@@ -3,7 +3,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import Navbar from './components/navbar'
 import Sidebar from './components/sidebar';
 import Posts from './components/posts';
-import Footer from './components/footer';
+import Footer from './components/common/footer';
 import Courses from './components/courses';
 import Education from './components/edu';
 import Skill from './components/skill';

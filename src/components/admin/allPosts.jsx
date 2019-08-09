@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { getPosts, deletePost } from '../../services/postService';
 import { paginate } from '../../utils/paginate';
-import Pagination from '../pagination';
+import Pagination from '../common/pagination';
 import { toast } from 'react-toastify';
 
 class AllPosts extends Component {

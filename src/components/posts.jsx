@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {getPosts} from './../services/postService';
-import Like from './like';
-import Pagination from './pagination';
+import Like from './common/like';
+import Pagination from './common/pagination';
 import { paginate } from '../utils/paginate';
 
 class Posts extends Component {

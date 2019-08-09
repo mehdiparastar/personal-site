@@ -1,6 +1,6 @@
 import React from 'react';
 import{Link} from 'react-router-dom'
-import SearchBar from './searchBar';
+import SearchBar from './common/searchBar';
 
 const Navbar = () => {
     return (
