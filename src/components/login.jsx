@@ -12,14 +12,16 @@ class Login extends Component {
         e.preventDefault()
         try {
             const { data } = await login(this.state.email, this.state.password)
-            localStorage.setItem('token', data)
-            this.props.history.replace('/admin')
+            await localStorage.setItem('token', data)
+            console.log(await localStorage.getItem('token'))
+            // this.props.history.replace('/admin')
+            window.location.replace('/admin')            
         } catch (ex) {
             if (ex.response && ex.reaponse.status === 400)
                 toast.error('ایمیل و یا پسورد اشتباه است')
         }        
     }
-
+ 
     render() {
         return (
             <form onSubmit={this.handleSubmit} className='rtl form-signin border rounded m-2 mx-auto bg-light shadow'>

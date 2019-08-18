@@ -22,7 +22,7 @@ class Sidebar extends Component {
 
                     <UserInfo
                         imgUrl='https://via.placeholder.com/200x200'
-                        fullname='مهدی پرستار'
+                        fullname='تست تست'
                         text='کارشناس مانیتورینگ'
                     />
 

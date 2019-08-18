@@ -1,6 +1,6 @@
 import http from './httpService'
 import config from '../../src/config.json'
-
+ 
 export function createCourse(course) {
     return http.post(config.api_course, course)
 }

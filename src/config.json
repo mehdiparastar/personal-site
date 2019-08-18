@@ -1,6 +1,6 @@
 {
-    "api_post": "http://localhost:3900/api/post",
-    "api_course": "http://localhost:3900/api/course",
-    "api_login":"http://localhost:3900/api/login",
-    "api_users":"http://localhost:3900/api/users"
+    "api_post": "http://localhost:3800/api/post",
+    "api_course": "http://localhost:3800/api/course",
+    "api_login":"http://localhost:3800/api/login",
+    "api_users":"http://localhost:3800/api/users"
 }
